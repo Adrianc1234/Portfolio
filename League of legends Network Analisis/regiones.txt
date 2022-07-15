@@ -1,0 +1,13 @@
+Bandle City:rumble,tristana,corki,veigar,teemo,lulu:
+Demacia:lucian,vayne,morgana,kayle,poppy,shyvana,galio,lux,xin zhao,jarvan iv,garen,quinn,sona,fiora:
+Freljord:gnar,olaf,volibear,udyr,trundle,sejuani,anivia,ornn,lissandra,ashe,tryndamere,nunu,braum,gragas:
+Ionia:ahri,wukong,master yi,irelia,yasuo,syndra,karma,kayn,varus,lee sin,zed,shen,xayah,rakan,jhin,akali,kennen,ivern:
+Mount Targon:soraka,taric,leona,diana,aurelion sol,zoe,pantheon:
+Noxus:riven,leblanc,vladimir,draven,swain,darius,katarina,talon,sion,cassiopeia,kled:
+Piltover:orianna,vi,caitlyn,camile,jayce,ezreal,heimerdinger:
+Bilgewater:fizz,nautilus,tahm kench,illaoi,pyke,graves,miss fortune,twisted fate,gankplank:
+Shadow Isles:elise,mordekaiser,hecarim,maokai,karthus,kalista,yorick,thresh:
+Shurima:rengar,skarner,nasus,renekton,xerath,taliyah,sivir,azir,amumu,rammus:
+The Void:kassadin,kai'sa,rek'sai,malzahar,kog'maw,cho'gath,kha'zix,vel'koz:
+Zaun:singed,warwick,dr mundo,urgot,viktor,blitzcrank,ekko,janna,jinx,ziggs,twitch,zac:
+Runeterra:shaco,fiddlesticks,nocturne,alistar,zilean,nidalee,jax,brand,ryze,aatrox,evelynn,malphite,nami,kindred,zyra,annie,bard:

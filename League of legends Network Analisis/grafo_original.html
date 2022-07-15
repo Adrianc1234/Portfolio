@@ -1,0 +1,204 @@
+<html>
+<head>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vis-network@latest/styles/vis-network.css" type="text/css" />
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vis-network@latest/dist/vis-network.min.js"> </script>
+<center>
+<h1>League of Legends - Universe Network</h1>
+</center>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+
+<style type="text/css">
+
+        #mynetwork {
+            width: 2000px;
+            height: 1500px;
+            background-color: #222222;
+            border: 1px solid lightgray;
+            position: relative;
+            float: left;
+        }
+
+        
+        #loadingBar {
+            position:absolute;
+            top:0px;
+            left:0px;
+            width: 2000px;
+            height: 1500px;
+            background-color:rgba(200,200,200,0.8);
+            -webkit-transition: all 0.5s ease;
+            -moz-transition: all 0.5s ease;
+            -ms-transition: all 0.5s ease;
+            -o-transition: all 0.5s ease;
+            transition: all 0.5s ease;
+            opacity:1;
+        }
+
+        #bar {
+            position:absolute;
+            top:0px;
+            left:0px;
+            width:20px;
+            height:20px;
+            margin:auto auto auto auto;
+            border-radius:11px;
+            border:2px solid rgba(30,30,30,0.05);
+            background: rgb(0, 173, 246); /* Old browsers */
+            box-shadow: 2px 0px 4px rgba(0,0,0,0.4);
+        }
+
+        #border {
+            position:absolute;
+            top:10px;
+            left:10px;
+            width:500px;
+            height:23px;
+            margin:auto auto auto auto;
+            box-shadow: 0px 0px 4px rgba(0,0,0,0.2);
+            border-radius:10px;
+        }
+
+        #text {
+            position:absolute;
+            top:8px;
+            left:530px;
+            width:30px;
+            height:50px;
+            margin:auto auto auto auto;
+            font-size:22px;
+            color: #000000;
+        }
+
+        div.outerBorder {
+            position:relative;
+            top:400px;
+            width:600px;
+            height:44px;
+            margin:auto auto auto auto;
+            border:8px solid rgba(0,0,0,0.1);
+            background: rgb(252,252,252); /* Old browsers */
+            background: -moz-linear-gradient(top,  rgba(252,252,252,1) 0%, rgba(237,237,237,1) 100%); /* FF3.6+ */
+            background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(252,252,252,1)), color-stop(100%,rgba(237,237,237,1))); /* Chrome,Safari4+ */
+            background: -webkit-linear-gradient(top,  rgba(252,252,252,1) 0%,rgba(237,237,237,1) 100%); /* Chrome10+,Safari5.1+ */
+            background: -o-linear-gradient(top,  rgba(252,252,252,1) 0%,rgba(237,237,237,1) 100%); /* Opera 11.10+ */
+            background: -ms-linear-gradient(top,  rgba(252,252,252,1) 0%,rgba(237,237,237,1) 100%); /* IE10+ */
+            background: linear-gradient(to bottom,  rgba(252,252,252,1) 0%,rgba(237,237,237,1) 100%); /* W3C */
+            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fcfcfc', endColorstr='#ededed',GradientType=0 ); /* IE6-9 */
+            border-radius:72px;
+            box-shadow: 0px 0px 10px rgba(0,0,0,0.2);
+        }
+        
+
+        
+
+        
+</style>
+
+</head>
+
+<body>
+<div id = "mynetwork"></div>
+
+<div id="loadingBar">
+    <div class="outerBorder">
+        <div id="text">0%</div>
+        <div id="border">
+            <div id="bar"></div>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+
+    // initialize global variables.
+    var edges;
+    var nodes;
+    var network; 
+    var container;
+    var options, data;
+
+    
+    // This method is responsible for drawing the graph, returns the drawn network
+    function drawGraph() {
+        var container = document.getElementById('mynetwork');
+        
+        
+
+        // parsing and collecting nodes and edges from the python
+        nodes = new vis.DataSet([{"color": "#9933FF", "font": {"color": "white"}, "id": 0, "label": "aatrox", "shape": "dot"}, {"color": "#33CCFF", "font": {"color": "white"}, "id": 1, "label": "ahri", "shape": "dot"}, {"color": "#33CCFF", "font": {"color": "white"}, "id": 2, "label": "akali", "shape": "dot"}, {"color": "#9933FF", "font": {"color": "white"}, "id": 3, "label": "alistar", "shape": "dot"}, {"color": "#FF99CC", "font": {"color": "white"}, "id": 4, "label": "amumu", "shape": "dot"}, {"color": "#FFFF00", "font": {"color": "white"}, "id": 5, "label": "anivia", "shape": "dot"}, {"color": "#9933FF", "font": {"color": "white"}, "id": 6, "label": "annie", "shape": "dot"}, {"color": "#FFFF00", "font": {"color": "white"}, "id": 7, "label": "ashe", "shape": "dot"}, {"color": "#CCFF99", "font": {"color": "white"}, "id": 8, "label": "aurelion sol", "shape": "dot"}, {"color": "#FF99CC", "font": {"color": "white"}, "id": 9, "label": "azir", "shape": "dot"}, {"color": "#9933FF", "font": {"color": "white"}, "id": 10, "label": "bard", "shape": "dot"}, {"color": "#99FFFF", "font": {"color": "white"}, "id": 11, "label": "blitzcrank", "shape": "dot"}, {"color": "#9933FF", "font": {"color": "white"}, "id": 12, "label": "brand", "shape": "dot"}, {"color": "#FFFF00", "font": {"color": "white"}, "id": 13, "label": "braum", "shape": "dot"}, {"color": "#FFCC99", "font": {"color": "white"}, "id": 14, "label": "caitlyn", "shape": "dot"}, {"color": "#FFCC99", "font": {"color": "white"}, "id": 15, "label": "camile", "shape": "dot"}, {"color": "#FF9933", "font": {"color": "white"}, "id": 16, "label": "cassiopeia", "shape": "dot"}, {"color": "#FF3333", "font": {"color": "white"}, "id": 17, "label": "cho\u0027gath", "shape": "dot"}, {"color": "#CCCCCC", "font": {"color": "white"}, "id": 18, "label": "corki", "shape": "dot"}, {"color": "#FF9933", "font": {"color": "white"}, "id": 19, "label": "darius", "shape": "dot"}, {"color": "#CCFF99", "font": {"color": "white"}, "id": 20, "label": "diana", "shape": "dot"}, {"color": "#99FFFF", "font": {"color": "white"}, "id": 21, "label": "dr mundo", "shape": "dot"}, {"color": "#FF9933", "font": {"color": "white"}, "id": 22, "label": "draven", "shape": "dot"}, {"color": "#99FFFF", "font": {"color": "white"}, "id": 23, "label": "ekko", "shape": "dot"}, {"color": "#FF3399", "font": {"color": "white"}, "id": 24, "label": "elise", "shape": "dot"}, {"color": "#9933FF", "font": {"color": "white"}, "id": 25, "label": "evelynn", "shape": "dot"}, {"color": "#FFCC99", "font": {"color": "white"}, "id": 26, "label": "ezreal", "shape": "dot"}, {"color": "#9933FF", "font": {"color": "white"}, "id": 27, "label": "fiddlesticks", "shape": "dot"}, {"color": "#00CC99", "font": {"color": "white"}, "id": 28, "label": "fiora", "shape": "dot"}, {"color": "#FF3300", "font": {"color": "white"}, "id": 29, "label": "fizz", "shape": "dot"}, {"color": "#00CC99", "font": {"color": "white"}, "id": 30, "label": "galio", "shape": "dot"}, {"color": "#FF3300", "font": {"color": "white"}, "id": 31, "label": "gankplank", "shape": "dot"}, {"color": "#00CC99", "font": {"color": "white"}, "id": 32, "label": "garen", "shape": "dot"}, {"color": "#FFFF00", "font": {"color": "white"}, "id": 33, "label": "gnar", "shape": "dot"}, {"color": "#FFFF00", "font": {"color": "white"}, "id": 34, "label": "gragas", "shape": "dot"}, {"color": "#FF3300", "font": {"color": "white"}, "id": 35, "label": "graves", "shape": "dot"}, {"color": "#FF3399", "font": {"color": "white"}, "id": 36, "label": "hecarim", "shape": "dot"}, {"color": "#FFCC99", "font": {"color": "white"}, "id": 37, "label": "heimerdinger", "shape": "dot"}, {"color": "#FF3300", "font": {"color": "white"}, "id": 38, "label": "illaoi", "shape": "dot"}, {"color": "#33CCFF", "font": {"color": "white"}, "id": 39, "label": "irelia", "shape": "dot"}, {"color": "#33CCFF", "font": {"color": "white"}, "id": 40, "label": "ivern", "shape": "dot"}, {"color": "#99FFFF", "font": {"color": "white"}, "id": 41, "label": "janna", "shape": "dot"}, {"color": "#00CC99", "font": {"color": "white"}, "id": 42, "label": "jarvan iv", "shape": "dot"}, {"color": "#9933FF", "font": {"color": "white"}, "id": 43, "label": "jax", "shape": "dot"}, {"color": "#FFCC99", "font": {"color": "white"}, "id": 44, "label": "jayce", "shape": "dot"}, {"color": "#33CCFF", "font": {"color": "white"}, "id": 45, "label": "jhin", "shape": "dot"}, {"color": "#99FFFF", "font": {"color": "white"}, "id": 46, "label": "jinx", "shape": "dot"}, {"color": "#FF3333", "font": {"color": "white"}, "id": 47, "label": "kai\u0027sa", "shape": "dot"}, {"color": "#FF3399", "font": {"color": "white"}, "id": 48, "label": "kalista", "shape": "dot"}, {"color": "#33CCFF", "font": {"color": "white"}, "id": 49, "label": "karma", "shape": "dot"}, {"color": "#FF3399", "font": {"color": "white"}, "id": 50, "label": "karthus", "shape": "dot"}, {"color": "#FF3333", "font": {"color": "white"}, "id": 51, "label": "kassadin", "shape": "dot"}, {"color": "#FF9933", "font": {"color": "white"}, "id": 52, "label": "katarina", "shape": "dot"}, {"color": "#00CC99", "font": {"color": "white"}, "id": 53, "label": "kayle", "shape": "dot"}, {"color": "#33CCFF", "font": {"color": "white"}, "id": 54, "label": "kayn", "shape": "dot"}, {"color": "#33CCFF", "font": {"color": "white"}, "id": 55, "label": "kennen", "shape": "dot"}, {"color": "#FF3333", "font": {"color": "white"}, "id": 56, "label": "kha\u0027zix", "shape": "dot"}, {"color": "#9933FF", "font": {"color": "white"}, "id": 57, "label": "kindred", "shape": "dot"}, {"color": "#FF9933", "font": {"color": "white"}, "id": 58, "label": "kled", "shape": "dot"}, {"color": "#FF3333", "font": {"color": "white"}, "id": 59, "label": "kog\u0027maw", "shape": "dot"}, {"color": "#FF9933", "font": {"color": "white"}, "id": 60, "label": "leblanc", "shape": "dot"}, {"color": "#33CCFF", "font": {"color": "white"}, "id": 61, "label": "lee sin", "shape": "dot"}, {"color": "#CCFF99", "font": {"color": "white"}, "id": 62, "label": "leona", "shape": "dot"}, {"color": "#FFFF00", "font": {"color": "white"}, "id": 63, "label": "lissandra", "shape": "dot"}, {"color": "#00CC99", "font": {"color": "white"}, "id": 64, "label": "lucian", "shape": "dot"}, {"color": "#CCCCCC", "font": {"color": "white"}, "id": 65, "label": "lulu", "shape": "dot"}, {"color": "#00CC99", "font": {"color": "white"}, "id": 66, "label": "lux", "shape": "dot"}, {"color": "#9933FF", "font": {"color": "white"}, "id": 67, "label": "malphite", "shape": "dot"}, {"color": "#FF3333", "font": {"color": "white"}, "id": 68, "label": "malzahar", "shape": "dot"}, {"color": "#FF3399", "font": {"color": "white"}, "id": 69, "label": "maokai", "shape": "dot"}, {"color": "#33CCFF", "font": {"color": "white"}, "id": 70, "label": "master yi", "shape": "dot"}, {"color": "#FF3300", "font": {"color": "white"}, "id": 71, "label": "miss fortune", "shape": "dot"}, {"color": "#FF3399", "font": {"color": "white"}, "id": 72, "label": "mordekaiser", "shape": "dot"}, {"color": "#00CC99", "font": {"color": "white"}, "id": 73, "label": "morgana", "shape": "dot"}, {"color": "#9933FF", "font": {"color": "white"}, "id": 74, "label": "nami", "shape": "dot"}, {"color": "#FF99CC", "font": {"color": "white"}, "id": 75, "label": "nasus", "shape": "dot"}, {"color": "#FF3300", "font": {"color": "white"}, "id": 76, "label": "nautilus", "shape": "dot"}, {"color": "#9933FF", "font": {"color": "white"}, "id": 77, "label": "nidalee", "shape": "dot"}, {"color": "#9933FF", "font": {"color": "white"}, "id": 78, "label": "nocturne", "shape": "dot"}, {"color": "#FFFF00", "font": {"color": "white"}, "id": 79, "label": "nunu", "shape": "dot"}, {"color": "#FFFF00", "font": {"color": "white"}, "id": 80, "label": "olaf", "shape": "dot"}, {"color": "#FFCC99", "font": {"color": "white"}, "id": 81, "label": "orianna", "shape": "dot"}, {"color": "#FFFF00", "font": {"color": "white"}, "id": 82, "label": "ornn", "shape": "dot"}, {"color": "#CCFF99", "font": {"color": "white"}, "id": 83, "label": "pantheon", "shape": "dot"}, {"color": "#00CC99", "font": {"color": "white"}, "id": 84, "label": "poppy", "shape": "dot"}, {"color": "#FF3300", "font": {"color": "white"}, "id": 85, "label": "pyke", "shape": "dot"}, {"color": "#00CC99", "font": {"color": "white"}, "id": 86, "label": "quinn", "shape": "dot"}, {"color": "#33CCFF", "font": {"color": "white"}, "id": 87, "label": "rakan", "shape": "dot"}, {"color": "#FF99CC", "font": {"color": "white"}, "id": 88, "label": "rammus", "shape": "dot"}, {"color": "#FF3333", "font": {"color": "white"}, "id": 89, "label": "rek\u0027sai", "shape": "dot"}, {"color": "#FF99CC", "font": {"color": "white"}, "id": 90, "label": "renekton", "shape": "dot"}, {"color": "#FF99CC", "font": {"color": "white"}, "id": 91, "label": "rengar", "shape": "dot"}, {"color": "#FF9933", "font": {"color": "white"}, "id": 92, "label": "riven", "shape": "dot"}, {"color": "#CCCCCC", "font": {"color": "white"}, "id": 93, "label": "rumble", "shape": "dot"}, {"color": "#9933FF", "font": {"color": "white"}, "id": 94, "label": "ryze", "shape": "dot"}, {"color": "#FFFF00", "font": {"color": "white"}, "id": 95, "label": "sejuani", "shape": "dot"}, {"color": "#9933FF", "font": {"color": "white"}, "id": 96, "label": "shaco", "shape": "dot"}, {"color": "#33CCFF", "font": {"color": "white"}, "id": 97, "label": "shen", "shape": "dot"}, {"color": "#00CC99", "font": {"color": "white"}, "id": 98, "label": "shyvana", "shape": "dot"}, {"color": "#99FFFF", "font": {"color": "white"}, "id": 99, "label": "singed", "shape": "dot"}, {"color": "#FF9933", "font": {"color": "white"}, "id": 100, "label": "sion", "shape": "dot"}, {"color": "#FF99CC", "font": {"color": "white"}, "id": 101, "label": "sivir", "shape": "dot"}, {"color": "#FF99CC", "font": {"color": "white"}, "id": 102, "label": "skarner", "shape": "dot"}, {"color": "#00CC99", "font": {"color": "white"}, "id": 103, "label": "sona", "shape": "dot"}, {"color": "#CCFF99", "font": {"color": "white"}, "id": 104, "label": "soraka", "shape": "dot"}, {"color": "#FF9933", "font": {"color": "white"}, "id": 105, "label": "swain", "shape": "dot"}, {"color": "#33CCFF", "font": {"color": "white"}, "id": 106, "label": "syndra", "shape": "dot"}, {"color": "#FF3300", "font": {"color": "white"}, "id": 107, "label": "tahm kench", "shape": "dot"}, {"color": "#FF99CC", "font": {"color": "white"}, "id": 108, "label": "taliyah", "shape": "dot"}, {"color": "#FF9933", "font": {"color": "white"}, "id": 109, "label": "talon", "shape": "dot"}, {"color": "#CCFF99", "font": {"color": "white"}, "id": 110, "label": "taric", "shape": "dot"}, {"color": "#CCCCCC", "font": {"color": "white"}, "id": 111, "label": "teemo", "shape": "dot"}, {"color": "#FF3399", "font": {"color": "white"}, "id": 112, "label": "thresh", "shape": "dot"}, {"color": "#CCCCCC", "font": {"color": "white"}, "id": 113, "label": "tristana", "shape": "dot"}, {"color": "#FFFF00", "font": {"color": "white"}, "id": 114, "label": "trundle", "shape": "dot"}, {"color": "#FFFF00", "font": {"color": "white"}, "id": 115, "label": "tryndamere", "shape": "dot"}, {"color": "#FF3300", "font": {"color": "white"}, "id": 116, "label": "twisted fate", "shape": "dot"}, {"color": "#99FFFF", "font": {"color": "white"}, "id": 117, "label": "twitch", "shape": "dot"}, {"color": "#FFFF00", "font": {"color": "white"}, "id": 118, "label": "udyr", "shape": "dot"}, {"color": "#99FFFF", "font": {"color": "white"}, "id": 119, "label": "urgot", "shape": "dot"}, {"color": "#33CCFF", "font": {"color": "white"}, "id": 120, "label": "varus", "shape": "dot"}, {"color": "#00CC99", "font": {"color": "white"}, "id": 121, "label": "vayne", "shape": "dot"}, {"color": "#CCCCCC", "font": {"color": "white"}, "id": 122, "label": "veigar", "shape": "dot"}, {"color": "#FF3333", "font": {"color": "white"}, "id": 123, "label": "vel\u0027koz", "shape": "dot"}, {"color": "#FFCC99", "font": {"color": "white"}, "id": 124, "label": "vi", "shape": "dot"}, {"color": "#99FFFF", "font": {"color": "white"}, "id": 125, "label": "viktor", "shape": "dot"}, {"color": "#FF9933", "font": {"color": "white"}, "id": 126, "label": "vladimir", "shape": "dot"}, {"color": "#FFFF00", "font": {"color": "white"}, "id": 127, "label": "volibear", "shape": "dot"}, {"color": "#99FFFF", "font": {"color": "white"}, "id": 128, "label": "warwick", "shape": "dot"}, {"color": "#33CCFF", "font": {"color": "white"}, "id": 129, "label": "wukong", "shape": "dot"}, {"color": "#33CCFF", "font": {"color": "white"}, "id": 130, "label": "xayah", "shape": "dot"}, {"color": "#FF99CC", "font": {"color": "white"}, "id": 131, "label": "xerath", "shape": "dot"}, {"color": "#00CC99", "font": {"color": "white"}, "id": 132, "label": "xin zhao", "shape": "dot"}, {"color": "#33CCFF", "font": {"color": "white"}, "id": 133, "label": "yasuo", "shape": "dot"}, {"color": "#FF3399", "font": {"color": "white"}, "id": 134, "label": "yorick", "shape": "dot"}, {"color": "#99FFFF", "font": {"color": "white"}, "id": 135, "label": "zac", "shape": "dot"}, {"color": "#33CCFF", "font": {"color": "white"}, "id": 136, "label": "zed", "shape": "dot"}, {"color": "#99FFFF", "font": {"color": "white"}, "id": 137, "label": "ziggs", "shape": "dot"}, {"color": "#9933FF", "font": {"color": "white"}, "id": 138, "label": "zilean", "shape": "dot"}, {"color": "#CCFF99", "font": {"color": "white"}, "id": 139, "label": "zoe", "shape": "dot"}, {"color": "#9933FF", "font": {"color": "white"}, "id": 140, "label": "zyra", "shape": "dot"}]);
+        edges = new vis.DataSet([{"from": 1, "to": 129}, {"from": 129, "to": 70}, {"from": 70, "to": 99}, {"from": 99, "to": 21}, {"from": 99, "to": 128}, {"from": 99, "to": 92}, {"from": 99, "to": 39}, {"from": 21, "to": 125}, {"from": 128, "to": 121}, {"from": 128, "to": 15}, {"from": 92, "to": 60}, {"from": 92, "to": 133}, {"from": 39, "to": 105}, {"from": 39, "to": 104}, {"from": 39, "to": 106}, {"from": 39, "to": 49}, {"from": 125, "to": 11}, {"from": 125, "to": 23}, {"from": 125, "to": 81}, {"from": 125, "to": 44}, {"from": 125, "to": 119}, {"from": 15, "to": 23}, {"from": 15, "to": 44}, {"from": 15, "to": 81}, {"from": 15, "to": 119}, {"from": 15, "to": 124}, {"from": 15, "to": 14}, {"from": 15, "to": 26}, {"from": 121, "to": 100}, {"from": 121, "to": 25}, {"from": 121, "to": 126}, {"from": 60, "to": 105}, {"from": 60, "to": 24}, {"from": 60, "to": 72}, {"from": 133, "to": 108}, {"from": 105, "to": 119}, {"from": 105, "to": 100}, {"from": 105, "to": 126}, {"from": 105, "to": 42}, {"from": 105, "to": 22}, {"from": 105, "to": 19}, {"from": 105, "to": 52}, {"from": 105, "to": 31}, {"from": 104, "to": 50}, {"from": 106, "to": 49}, {"from": 49, "to": 61}, {"from": 23, "to": 44}, {"from": 23, "to": 119}, {"from": 23, "to": 124}, {"from": 23, "to": 14}, {"from": 23, "to": 41}, {"from": 23, "to": 46}, {"from": 11, "to": 81}, {"from": 44, "to": 124}, {"from": 44, "to": 14}, {"from": 44, "to": 26}, {"from": 44, "to": 102}, {"from": 119, "to": 100}, {"from": 119, "to": 42}, {"from": 119, "to": 19}, {"from": 119, "to": 32}, {"from": 124, "to": 14}, {"from": 124, "to": 46}, {"from": 14, "to": 26}, {"from": 14, "to": 46}, {"from": 26, "to": 51}, {"from": 26, "to": 89}, {"from": 26, "to": 66}, {"from": 26, "to": 139}, {"from": 24, "to": 126}, {"from": 72, "to": 50}, {"from": 72, "to": 48}, {"from": 72, "to": 36}, {"from": 72, "to": 57}, {"from": 108, "to": 75}, {"from": 108, "to": 131}, {"from": 108, "to": 9}, {"from": 108, "to": 101}, {"from": 50, "to": 57}, {"from": 61, "to": 118}, {"from": 61, "to": 130}, {"from": 61, "to": 87}, {"from": 25, "to": 107}, {"from": 25, "to": 94}, {"from": 126, "to": 19}, {"from": 48, "to": 36}, {"from": 48, "to": 134}, {"from": 48, "to": 112}, {"from": 36, "to": 134}, {"from": 36, "to": 112}, {"from": 36, "to": 38}, {"from": 36, "to": 71}, {"from": 36, "to": 64}, {"from": 22, "to": 19}, {"from": 57, "to": 134}, {"from": 52, "to": 100}, {"from": 52, "to": 19}, {"from": 52, "to": 32}, {"from": 52, "to": 109}, {"from": 52, "to": 16}, {"from": 31, "to": 35}, {"from": 31, "to": 85}, {"from": 31, "to": 116}, {"from": 31, "to": 38}, {"from": 31, "to": 71}, {"from": 118, "to": 95}, {"from": 118, "to": 77}, {"from": 118, "to": 63}, {"from": 46, "to": 137}, {"from": 46, "to": 37}, {"from": 102, "to": 89}, {"from": 102, "to": 67}, {"from": 100, "to": 42}, {"from": 100, "to": 30}, {"from": 42, "to": 32}, {"from": 42, "to": 66}, {"from": 42, "to": 28}, {"from": 42, "to": 98}, {"from": 42, "to": 132}, {"from": 42, "to": 86}, {"from": 19, "to": 54}, {"from": 32, "to": 28}, {"from": 32, "to": 132}, {"from": 32, "to": 86}, {"from": 32, "to": 66}, {"from": 32, "to": 78}, {"from": 32, "to": 110}, {"from": 51, "to": 68}, {"from": 51, "to": 47}, {"from": 89, "to": 123}, {"from": 66, "to": 139}, {"from": 66, "to": 30}, {"from": 66, "to": 78}, {"from": 66, "to": 28}, {"from": 66, "to": 132}, {"from": 139, "to": 110}, {"from": 139, "to": 0}, {"from": 139, "to": 8}, {"from": 139, "to": 62}, {"from": 139, "to": 83}, {"from": 139, "to": 20}, {"from": 75, "to": 131}, {"from": 75, "to": 9}, {"from": 75, "to": 101}, {"from": 75, "to": 94}, {"from": 75, "to": 16}, {"from": 75, "to": 54}, {"from": 75, "to": 0}, {"from": 75, "to": 43}, {"from": 75, "to": 90}, {"from": 75, "to": 12}, {"from": 75, "to": 120}, {"from": 67, "to": 69}, {"from": 131, "to": 9}, {"from": 131, "to": 101}, {"from": 131, "to": 12}, {"from": 131, "to": 90}, {"from": 131, "to": 16}, {"from": 9, "to": 101}, {"from": 9, "to": 120}, {"from": 9, "to": 90}, {"from": 9, "to": 16}, {"from": 9, "to": 54}, {"from": 9, "to": 0}, {"from": 101, "to": 16}, {"from": 101, "to": 90}, {"from": 130, "to": 87}, {"from": 130, "to": 136}, {"from": 87, "to": 136}, {"from": 107, "to": 29}, {"from": 107, "to": 85}, {"from": 107, "to": 76}, {"from": 94, "to": 30}, {"from": 94, "to": 68}, {"from": 94, "to": 12}, {"from": 94, "to": 71}, {"from": 94, "to": 103}, {"from": 94, "to": 114}, {"from": 134, "to": 112}, {"from": 134, "to": 69}, {"from": 112, "to": 64}, {"from": 38, "to": 71}, {"from": 38, "to": 29}, {"from": 38, "to": 76}, {"from": 71, "to": 64}, {"from": 71, "to": 35}, {"from": 71, "to": 85}, {"from": 71, "to": 116}, {"from": 71, "to": 80}, {"from": 64, "to": 80}, {"from": 137, "to": 37}, {"from": 137, "to": 93}, {"from": 137, "to": 122}, {"from": 37, "to": 93}, {"from": 37, "to": 122}, {"from": 37, "to": 18}, {"from": 37, "to": 33}, {"from": 109, "to": 16}, {"from": 109, "to": 86}, {"from": 16, "to": 90}, {"from": 30, "to": 98}, {"from": 30, "to": 53}, {"from": 30, "to": 84}, {"from": 95, "to": 63}, {"from": 95, "to": 114}, {"from": 95, "to": 80}, {"from": 95, "to": 127}, {"from": 95, "to": 5}, {"from": 95, "to": 115}, {"from": 95, "to": 7}, {"from": 95, "to": 82}, {"from": 77, "to": 91}, {"from": 63, "to": 12}, {"from": 63, "to": 114}, {"from": 63, "to": 5}, {"from": 63, "to": 115}, {"from": 63, "to": 7}, {"from": 63, "to": 82}, {"from": 63, "to": 79}, {"from": 63, "to": 13}, {"from": 136, "to": 54}, {"from": 136, "to": 97}, {"from": 136, "to": 45}, {"from": 136, "to": 2}, {"from": 136, "to": 55}, {"from": 69, "to": 140}, {"from": 35, "to": 116}, {"from": 29, "to": 74}, {"from": 29, "to": 76}, {"from": 76, "to": 74}, {"from": 110, "to": 8}, {"from": 110, "to": 62}, {"from": 110, "to": 83}, {"from": 110, "to": 20}, {"from": 110, "to": 103}, {"from": 78, "to": 27}, {"from": 78, "to": 96}, {"from": 28, "to": 43}, {"from": 98, "to": 132}, {"from": 98, "to": 84}, {"from": 132, "to": 103}, {"from": 132, "to": 3}, {"from": 54, "to": 0}, {"from": 54, "to": 90}, {"from": 54, "to": 120}, {"from": 54, "to": 97}, {"from": 68, "to": 47}, {"from": 68, "to": 59}, {"from": 123, "to": 59}, {"from": 123, "to": 17}, {"from": 123, "to": 138}, {"from": 123, "to": 56}, {"from": 93, "to": 122}, {"from": 93, "to": 113}, {"from": 93, "to": 111}, {"from": 122, "to": 18}, {"from": 122, "to": 111}, {"from": 122, "to": 65}, {"from": 122, "to": 58}, {"from": 33, "to": 65}, {"from": 33, "to": 91}, {"from": 33, "to": 79}, {"from": 0, "to": 83}, {"from": 0, "to": 115}, {"from": 0, "to": 90}, {"from": 0, "to": 120}, {"from": 8, "to": 62}, {"from": 8, "to": 83}, {"from": 8, "to": 20}, {"from": 62, "to": 83}, {"from": 62, "to": 20}, {"from": 83, "to": 20}, {"from": 43, "to": 90}, {"from": 43, "to": 34}, {"from": 90, "to": 12}, {"from": 90, "to": 120}, {"from": 12, "to": 5}, {"from": 114, "to": 7}, {"from": 80, "to": 127}, {"from": 27, "to": 96}, {"from": 53, "to": 73}, {"from": 59, "to": 17}, {"from": 59, "to": 56}, {"from": 127, "to": 5}, {"from": 127, "to": 138}, {"from": 127, "to": 82}, {"from": 5, "to": 7}, {"from": 5, "to": 82}, {"from": 5, "to": 79}, {"from": 115, "to": 7}, {"from": 115, "to": 34}, {"from": 115, "to": 13}, {"from": 7, "to": 34}, {"from": 7, "to": 82}, {"from": 7, "to": 79}, {"from": 7, "to": 13}, {"from": 91, "to": 56}, {"from": 13, "to": 34}, {"from": 97, "to": 45}, {"from": 97, "to": 2}, {"from": 97, "to": 55}, {"from": 45, "to": 2}, {"from": 2, "to": 55}, {"from": 113, "to": 111}, {"from": 17, "to": 56}, {"from": 117, "to": 135}]);
+
+        // adding nodes and edges to the graph
+        data = {nodes: nodes, edges: edges};
+
+        var options = {
+    "configure": {
+        "enabled": false
+    },
+    "edges": {
+        "color": {
+            "inherit": true
+        },
+        "smooth": {
+            "enabled": true,
+            "type": "dynamic"
+        }
+    },
+    "interaction": {
+        "dragNodes": true,
+        "hideEdgesOnDrag": false,
+        "hideNodesOnDrag": false
+    },
+    "physics": {
+        "enabled": true,
+        "stabilization": {
+            "enabled": true,
+            "fit": true,
+            "iterations": 1000,
+            "onlyDynamicEdges": false,
+            "updateInterval": 50
+        }
+    }
+};
+        
+        
+
+        
+
+        network = new vis.Network(container, data, options);
+	 
+        
+
+
+        
+        network.on("stabilizationProgress", function(params) {
+      		document.getElementById('loadingBar').removeAttribute("style");
+	        var maxWidth = 496;
+	        var minWidth = 20;
+	        var widthFactor = params.iterations/params.total;
+	        var width = Math.max(minWidth,maxWidth * widthFactor);
+
+	        document.getElementById('bar').style.width = width + 'px';
+	        document.getElementById('text').innerHTML = Math.round(widthFactor*100) + '%';
+	    });
+	    network.once("stabilizationIterationsDone", function() {
+	        document.getElementById('text').innerHTML = '100%';
+	        document.getElementById('bar').style.width = '496px';
+	        document.getElementById('loadingBar').style.opacity = 0;
+	        // really clean the dom element
+	        setTimeout(function () {document.getElementById('loadingBar').style.display = 'none';}, 500);
+	    });
+        
+
+        return network;
+
+    }
+
+    drawGraph();
+
+</script>
+</body>
+</html>

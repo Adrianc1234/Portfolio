@@ -1,0 +1,115 @@
+ahri:wukong:
+wukong:master yi:
+master yi:singed:
+singed:dr mundo,warwick,riven,irelia:
+dr mundo:viktor:
+warwick:vayne,camile:
+riven:leblanc,yasuo:
+irelia:swain,soraka,syndra,karma:
+viktor:blitzcrank,ekko,orianna,jayce,urgot
+camile:ekko,jayce,orianna,urgot,vi,caitlyn,ezreal:
+vayne:sion,evelynn,vladimir:
+leblanc:swain,elise,mordekaiser:
+yasuo:taliyah:
+swain:urgot,sion,vladimir,jarvan iv,draven,darius,katarina,gankplank:
+soraka:karthus:
+syndra:karma:
+karma:lee sin:
+ekko:jayce,urgot,vi,caitlyn,janna,jinx:
+blitzcrank:orianna:
+jayce:vi,caitlyn,ezreal,skarner:
+urgot:sion,jarvan iv,darius,garen:
+vi:caitlyn,jinx:
+caitlyn:ezreal,jinx:
+ezreal:kassadin,rek'sai,lux,zoe:
+elise:vladimir:
+mordekaiser:karthus,kalista,hecarim,kindred:
+taliyah:nasus,xerath,azir,sivir:
+karthus:kindred:
+lee sin:udyr,xayah,rakan:
+evelynn:tahm kench,ryze:
+vladimir:darius:
+kalista:hecarim,yorick,thresh:
+hecarim:yorick,thresh,illaoi,miss fortune,lucian:
+draven:darius:
+kindred:yorick:
+katarina:sion,darius,garen,talon,cassiopeia:
+gankplank:graves,pyke,twisted fate,illaoi,miss fortune:
+udyr:sejuani,nidalee,lissandra:
+jinx:ziggs,heimerdinger
+skarner:rek'sai,malphite:
+sion:jarvan iv,galio:
+jarvan iv:garen,lux,fiora,shyvana,xin zhao,quinn:
+darius:kayn:
+garen:fiora,xin zhao,quinn,lux,nocturne,taric:
+kassadin:malzahar,kai'sa:
+rek'sai:vel'koz:
+lux:zoe,galio,nocturne,fiora,xin zhao:
+zoe:taric,aatrox,aurelion sol,leona,pantheon,diana:
+nasus:xerath,azir,sivir,ryze,cassiopeia,kayn,aatrox,jax,renekton,brand,varus:
+malphite:maokai:
+xerath:azir,sivir,brand,renekton,cassiopeia:
+azir:sivir,varus,renekton,cassiopeia,kayn,aatrox:
+sivir:cassiopeia,renekton:
+xayah:rakan,zed:
+rakan:zed:
+tahm kench:fizz,pyke,nautilus:
+ryze:galio,malzahar,brand,miss fortune,sona,trundle:
+yorick:thresh,maokai:
+thresh:lucian:
+illaoi:miss fortune,fizz,nautilus:
+miss fortune:lucian,graves,pyke,twisted fate,olaf:
+lucian:olaf:
+ziggs:heimerdinger,rumble,veigar:
+heimerdinger:rumble,veigar,corki,gnar:
+talon:cassiopeia,quinn:
+cassiopeia:renekton:
+galio:shyvana,kayle,poppy:
+sejuani:lissandra,trundle,olaf,volibear,anivia,tryndamere,ashe,ornn:
+nidalee:rengar:
+lissandra:brand,trundle,anivia,tryndamere,ashe,ornn,nunu,braum:
+zed:kayn,shen,jhin,akali,kennen:
+maokai:zyra:
+graves:twisted fate:
+fizz:nami,nautilus:
+nautilus:nami:
+taric:aurelion sol,leona,pantheon,diana,sona:
+nocturne:fiddlesticks,shaco:
+fiora:jax:
+shyvana:xin zhao,poppy:
+xin zhao:sona,alistar:
+kayn:aatrox,renekton,varus,shen:
+malzahar:kai'sa,kog'maw:
+vel'koz:kog'maw,cho'gath,zilean,kha'zix:
+rumble:veigar,tristana,teemo:
+veigar:corki,teemo,lulu,kled:
+gnar:lulu,rengar,nunu:
+aatrox:pantheon,tryndamere,renekton,varus:
+aurelion sol:leona,pantheon,diana:
+leona:pantheon,diana:
+pantheon:diana:
+jax:renekton,gragas:
+renekton:brand,varus:
+brand:anivia:
+trundle:ashe:
+olaf:volibear:
+fiddlesticks:shaco:
+kayle:morgana:
+kog'maw:cho'gath,kha'zix:
+volibear:anivia,zilean,ornn:
+anivia:ashe,ornn,nunu:
+tryndamere:ashe,gragas,braum:
+ashe:gragas,ornn,nunu,braum:
+rengar:kha'zix:
+braum:gragas:
+shen:jhin,akali,kennen:
+jhin:akali:
+akali:kennen:
+tristana:teemo:
+cho'gath:kha'zix:
+twitch:zac:
+bard
+ivern
+annie
+rammus
+amumu
