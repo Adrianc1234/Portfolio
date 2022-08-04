@@ -90,9 +90,9 @@ def scroll_more_contacts(scroll_down,scroll_top):
             response = -1
             scroll_top()
 ```
-`scroll_down()`: Is the one in charge of scrolling down the whole body of the page, it works with the active page.<br>
-`scroll_up()`: Is the one in charge of scrolling up the body of the page, reaching the title of the active page.<br>
-`scroll_more_contacts(scroll_down,scroll_top)`: This function combines the two previous ones so that when the scraper accesses your contacts, the list is expanded and then extracted.
+- `scroll_down()`: Is the one in charge of scrolling down the whole body of the page, it works with the active page.<br><br>
+- `scroll_up()`: Is the one in charge of scrolling up the body of the page, reaching the title of the active page.<br><br>
+- `scroll_more_contacts(scroll_down,scroll_top)`: This function combines the two previous ones so that when the scraper accesses your contacts, the list is expanded and then extracted.<br><br>
 
 - #### Extraction functions
 
@@ -195,11 +195,55 @@ def corte_cantidad(my_contact_original,data_original):
     data = links
     return my_contact,data
 ```
-`log_in(username,password)`<br>
-`nav_contactos(scroll_more_contacts)`<br>
-`my_contacts()`<br>
-`friend_contacs(scroll_down)`<br>
-`open_and_extract(data,friend_contacs)`<br>
-`corte_cantidad(my_contact_original,data_original)`<br>
+- `log_in(username,password)`: This function is in charge of requesting the username and password of your account, without the password being displayed in the terminal, which then within the same function, will open the LinkedIn login and insert them. After that, click on the login button and you will be in your account.<br><br>
+- `nav_contactos(scroll_more_contacts)`: This function takes as a parameter another function, which allows you to expand the whole list of your contacts and extract it. In addition to this, it is in charge of directing you from the home page to the page of your contacts.<br><br>
+- `my_contacts()`: This function allows you to scroll down to expand the entire list of your contacts and then extract and return it in an array.<br><br>
+- `friend_contacs(scroll_down)`: This function scrolls through the list of your friends' friends, and if you have multiple friends it clicks on the `next` button, returning an array with their information. <br><br>
+- `open_and_extract(data,friend_contacs)`: This function takes as parameter the links and the names of the people in your friends list, to view them one by one, calling in its process the function `friend_contacs(scroll_down)`, so that for each visited friend, the function extracts its contacts. <br><br>
+- `corte_cantidad(my_contact_original,data_original)`: This function is nothing more than a function to shorten the search, since LinkedIn can block us if we exceed the number of profiles visited.<br><br>
+
+### Creation of our network & files. 
+ - #### Making our network and saving information
+ ```python3
+ def add_nodes(my_contact_original,friend_contacts,G):
+    nodes = my_contact_original.copy()
+    for friends in friend_contacts:
+        nodes = nodes + friends[1]
+    for node in nodes:
+        G.add_node(node)
+    G.add_node(my_name)
+    return G
+
+def add_edges(my_contact_original,my_name,my_contact,friend_contacts,G):
+    
+    #links a mis amigos
+    for i in my_contact:
+        #print(my_name,i)
+        G.add_edge(my_name,i)
+    
+    #links amigo a sus amigos
+    for n in friend_contacts:
+        for nombre_amigo in n[1]:
+            #print(n[0],link)
+            G.add_edge(n[0],nombre_amigo)
+            if nombre_amigo is my_contact_original:
+                G.add_edge(my_name,nombre_amigo)
+            else:
+                continue
+
+    return G
+
+
+np.save('my_contact.npy', my_contact)
+np.save('my_contact_original.npy', my_contact_original)
+np.save('friend_contacts.npy', friend_contacts)
+
+G = nx.Graph() # crear un grafo
+G = add_nodes(my_contact_original,friend_contacts,G = G)
+G = add_edges(my_contact_original,my_name,my_contact,friend_contacts,G = G)
+
+nx.write_gexf(G, "linkedin_graf.gexf")
+```
+ 
 - ### Visualization
     time.sleep(1)
