@@ -20,12 +20,31 @@ The objective of Web Scraping in this social network is to get to know your cont
 
 ## How to use it?
 
-### Installation
+### Requirements Installation
+
   The first thing to do is to run a python script, which will install the necessary libraries to be able to run our new scripts. The first command we     must execute in our terminal is the following:
   
-  `pip install -r requirements.txt` 
+  `pip3 install -r requirements.txt` 
 
-### Requeriments
-
+### Extraction Process
+  
+  - <strong>Step 1</strong>
+  
+  This command will allow us to start the extraction process automatically by simply executing the following command:
+  
+  `python3 extraction.py`
+  
+  - <strong>Step 2</strong>
+  
+  In this step we must add all our necessary information to be able to log in LinkedIn, as well as our user name in the social network, as it appears     there. It is important to mention that the password will not be displayed at any time, but it will be saved, so when you finish typing it press the     enter key after each added information.
+  
+  <img src="https://snipboard.io/diQqZ2.jpg" width="600" height="100"> 
+  
+  - <strong>Step 3</strong>
+  
+  Once we provide our login data, the scraper will access your account and will go to the contacts section, where it will extract all the list of your     contacts. Then the terminal will ask you for a number of contacts that you want to scrape, `note that this may affect the scraping time`.
+  
+  <img src="https://snipboard.io/NK7kMe.jpg" width="700" height="350"> 
+  
 
 ## How does it work?
