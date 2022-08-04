@@ -53,7 +53,6 @@ def scroll_more_contacts(scroll_down,scroll_top):
 
 #=========================================================
 
-
 #log in
 def log_in(username,password):
 
@@ -94,6 +93,7 @@ def my_contacts():
             names.append(name)
     return names,data
 
+#looking for friend's friends
 def friend_contacs(scroll_down):
     status = 1
     data = []
@@ -116,7 +116,7 @@ def friend_contacs(scroll_down):
     else:
         return data
 
-#visitar cada perfil
+#visit each profile
 def open_and_extract(data,friend_contacs):
     data_contacts =[]
     #person = data
@@ -141,9 +141,10 @@ def open_and_extract(data,friend_contacs):
         print(f'{name} - Extracted successfully')
     return data_contacts
 
+#selecting an amount of random contacts
 def corte_cantidad(my_contact_original,data_original):
     links = []
-    cantidad = int(input('Contactos a scrappear: '))+1
+    cantidad = int(input('Contactos a scrappear: '))
     my_contact = np.random.choice(my_contact_original, cantidad, False)
     for item in my_contact:
         links.append(data_original[my_contact_original.index(item)])
@@ -208,12 +209,6 @@ def add_edges(my_contact_original,my_name,my_contact,friend_contacts,G):
 
     return G
 
-def visualizar(G):
-    #nx.draw_kamada_kawai(G)
-    nx.draw(G, pos = nx.spring_layout(G, scale=2), node_size=30, 
-    node_color='lightblue', linewidths=0.25, font_size=10, 
-    font_weight='light', with_labels=False) 
-    plt.show()
 
 np.save('my_contact.npy', my_contact)
 np.save('my_contact_original.npy', my_contact_original)
@@ -225,7 +220,15 @@ G = add_edges(my_contact_original,my_name,my_contact,friend_contacts,G = G)
 
 nx.write_gexf(G, "linkedin_graf.gexf")
 
-#visualizar(G)
+os.system('clear')
+print('Your linkedin_graf have been generated successfully - 100%')
+print('Your friends files have been generated successfully - 100%')
+res = input(("Do you want to render you visualization?(y/n): "))
+if res == 'y':
+    os.system('python3 grafo.py')
+else:
+    print('Thank you for use this scraper :)')
+
 
 
 

@@ -249,5 +249,7 @@ nx.write_gexf(G, "linkedin_graf.gexf")
 
 at the end we will obtain the network in a `linkedin_graf.gexf` file. 
 
-- ### Visualization
+### Visualization
+
+- #### 
 
