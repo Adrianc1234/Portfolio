@@ -1,3 +1,5 @@
+<h1><center>WEB SCRAPER FOR LINKEDIN</h1></center>
+
 ## What is LinkedIn? <img src="https://cdn-icons-png.flaticon.com/512/174/174857.png" width="20" height="20">
 
 LinkedIn is a platform that was born as a social network for professionals and companies. Its main objective is to connect people looking for work synergies and new professional or business opportunities.
@@ -45,6 +47,25 @@ The objective of Web Scraping in this social network is to get to know your cont
   Once we provide our login data, the scraper will access your account and will go to the contacts section, where it will extract all the list of your     contacts. Then the terminal will ask you for a number of contacts that you want to scrape, `note that this may affect the scraping time`.
   
   <img src="https://snipboard.io/NK7kMe.jpg" width="700" height="350"> 
+  
+  - <strong>Step 4</strong>
+  
+  The scraper will return the number of chosen contacts and their names, which are randomly selected from your original contact list. Once the list is     displayed, the screen will proceed to scrape and for each person scraped it will display a status `person's name - Extracted Successfully`.
+  
+  Once the extraction is finished it will show a message saying that the files have been generated perfectly, asking if we want to render or not the       graph with the files, in case we say `n`, the program will close. The opposite case will execute the rendering script, generating a `.html` file in     your folder, which can be opened with any browser.
+  
+  <img src="https://snipboard.io/bx5cDn.jpg" width="400" height="80"> 
+  
+  In case you answer `y`, you will get this screen:
+  
+  <img src="https://snipboard.io/b8zJkp.jpg" width="400" height="100"> 
+  
+  - <strong>Step 5</strong>
+  
+  Open this file with your navigator with right click and selecting `open with` and enjoy it.
+  
+  <img src="https://snipboard.io/SI5ABs.jpg" width="700" height="400"> 
+  
   
 
 ## How does it work?
