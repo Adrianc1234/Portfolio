@@ -246,4 +246,5 @@ nx.write_gexf(G, "linkedin_graf.gexf")
 ```
  
 - ### Visualization
-    time.sleep(1)
+hola soy adrian xd
+
