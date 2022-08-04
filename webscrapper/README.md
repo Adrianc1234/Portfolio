@@ -247,4 +247,4 @@ nx.write_gexf(G, "linkedin_graf.gexf")
  
 - ### Visualization
 hola soy adrian xd
-
+data engineer 
