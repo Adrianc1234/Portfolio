@@ -21,7 +21,8 @@ The objective of Web Scraping in this social network is to get to know your cont
 ## How to use it?
 
 ### Installation
-  The first thing to do is to run a python script, which will install the necessary libraries to be able to run our new scripts. The first command we     must execute in our terminal is the following: 
+  The first thing to do is to run a python script, which will install the necessary libraries to be able to run our new scripts. The first command we     must execute in our terminal is the following:
+  
   `pip install -r requirements.txt` 
 
 ### Requeriments
