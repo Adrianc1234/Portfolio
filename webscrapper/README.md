@@ -6,6 +6,7 @@ It is currently owned by Microsoft and is considered the largest professional co
 
 It is a network designed not so much to foster personal relationships, as Instagram, Facebook or Twitter are, but to create a network of contacts in the professional or work environment.
 
-## What is a Web Scrapper for LinkedIn?
+## What is a Web Scraper for LinkedIn?
+
 ## How to use it?
 ## How does it work?
