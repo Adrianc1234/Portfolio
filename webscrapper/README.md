@@ -26,6 +26,8 @@ The objective of Web Scraping in this social network is to get to know your cont
 
   The first thing to do is to run a python script, which will install the necessary libraries to be able to run our new scripts. The first command we     must execute in our terminal is the following:
   
+  `Execute chromedriver file` 
+  
   `pip3 install -r requirements.txt` 
   
   - <strong>Step 1</strong>
