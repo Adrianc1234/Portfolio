@@ -251,5 +251,28 @@ at the end we will obtain the network in a `linkedin_graf.gexf` file.
 
 ### Visualization
 
-- #### 
+```python3
+def visualizar(G):
+	net = Network('1500px', '2000px',bgcolor='#222222', font_color='white',heading="My linkedIn Network")
+	nodes = sorted(G.nodes)
+	#add nodes
+	for index in range(0,len(nodes)):
+		net.add_node(index, label=nodes[index])
+	
+	#print(G.edges)
+
+	#add edges
+	for edge in G.edges:
+		p1 = nodes.index(edge[0])
+		p2 = nodes.index(edge[1])
+		net.add_edge(p1,p2)
+
+	print('Your .html file have been generated successfully')
+	print('Please, open this file with you favourite web navigator :)')
+
+
+	net.save_graph(f'my_graf.html')
+```
+
+The visualization of the graph is done by reading the files and our generated graph, so after reading the sides, a pyvis object is created, which is the one in charge of interactively making our simple graph made in networkx. At the end we get an output, called `my_graf.html` which can be opened in your browser as mentioned above. `It is important to note that this is only a visualization`.
 
