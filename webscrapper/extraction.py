@@ -185,7 +185,7 @@ def add_nodes(my_contact_original,friend_contacts,G):
     nodes = my_contact_original.copy()
     for friends in friend_contacts:
         nodes = nodes + friends[1]
-    for node in nodes:
+    for node in list(set(nodes)):
         G.add_node(node)
     G.add_node(my_name)
     return G
