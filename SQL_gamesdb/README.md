@@ -1,3 +1,8 @@
+# Team
+- Adrian Carmona
+- Alejandro Hurtado
+- Victor U.
+- Alejandro Uicab
 # Instalation 
 
 ## Step 1 
